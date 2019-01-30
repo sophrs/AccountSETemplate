@@ -52,5 +52,9 @@ public class Account {
 		this.id = id;
 	}
 	
+	public String getAccount() {
+		return firstName + " " + lastName + " "+ accountNumber;
+	}
+	
 	
 }
