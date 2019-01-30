@@ -84,14 +84,23 @@ public class AccountServiceTest {
 	}
 	
 	
+	
 	@Test
 	public void accountConversionToJSONTestWithEmptyMap() {
+		String jsonString = "{\"firstName\":\"Lee\",\"lastName\":\"Dandy\",\"accountNumber\":\"5432\"}";
+		Account test = JSONUtil.getObjectForJson(jsonString, Account.class);
+		assertEquals("Not Worked","Lee Dandy 5432",test.getAccount());
 	
 	}
 	
 	@Test
 	public void accountConversionToJSONTestEmptyMapWithConversion() {
 	
+		Account anAcc = new Account("Soph", "Shlo", 1234, 1l);
+		String account = JSONUtil.getJSONForObject(anAcc);
+		myRepo.createAccount(account);
+		int size = myRepo.accountMap.size();
+		assertEquals("testfailed", 1, size);
 	}
 
 	@Test
@@ -106,12 +115,21 @@ public class AccountServiceTest {
 	
 	@Test
 	public void getCountForFirstNamesInAccountWhenOne() {
+		myRepo.createAccount(JSONUtil.getJSONForObject(new Account("Soph", "Shlo", 1,1l)));
+		int count = myRepo.getnumberofaccountswithfirstname("Soph");
+		assertEquals("testfailed", 1, count );
+		
 		
 	}
 
 	@Test
 	public void getCountForFirstNamesInAccountWhenMult() {
+		myRepo.createAccount(JSONUtil.getJSONForObject(new Account("Soph", "Shlo", 1,1l)));
+		myRepo.createAccount(JSONUtil.getJSONForObject(new Account("Soph", "Shlo", 1,2l)));
+		myRepo.createAccount(JSONUtil.getJSONForObject(new Account("Clare", "Shlo", 1,3l)));
+		int count = myRepo.getnumberofaccountswithfirstname("Soph");
+		assertEquals("testfailed", 2, count );
 		
 	}
-
+	
 }

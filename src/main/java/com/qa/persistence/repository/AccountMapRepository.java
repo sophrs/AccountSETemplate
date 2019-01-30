@@ -36,12 +36,10 @@ public class AccountMapRepository implements AccountRepository {
 		if (accountMap.containsKey(id)) {
 			accountMap.remove(id);
 			return "{\"message\": \"account sucessfully deleted\"}";
-		}
-		else {
+		} else {
 			return ("account doesnt exist");
 		}
-	
-	
+
 	}
 
 	public String updateAccount(Long id, String account) {
@@ -50,4 +48,21 @@ public class AccountMapRepository implements AccountRepository {
 		return "updated account";
 	}
 
+	public int getnumberofaccountswithfirstname(String firstName) {
+		String tempString = " ";
+		int count = 0;
+		for (Account i : accountMap.values()) {
+			if (i.getFirstName().equals(firstName)) {
+				count++;
+				String accountToString = i.toString();
+				accountToString += " ";
+				tempString += accountToString;
+			}
+		}
+
+		System.out.println(tempString);
+		return count;
+
+	}
+	
 }

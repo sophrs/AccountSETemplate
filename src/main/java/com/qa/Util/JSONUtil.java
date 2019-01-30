@@ -15,7 +15,7 @@ public class JSONUtil {
 		return gson.toJson(obj);
 	}
 	
-	public <T> T getObjectForJson(String jsonString, Class<T> clazz) {
+	public static <T> T getObjectForJson(String jsonString, Class<T> clazz) {
 		return gson.fromJson(jsonString, clazz);
 	}
 }
